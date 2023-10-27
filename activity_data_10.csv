@@ -1,4 +1,4 @@
-Activity Type, Date, Duration, Distance, Average heart rate
+Activity ActivityType, Date, Duration, Distance, Average heart rate
 Running, 04/01/2020, 67,  8.80, 152
 Swimming, 05/01/2020, 92,  4.01, 145
 Cycling, 10/01/2020, 107, 27.45, 106
