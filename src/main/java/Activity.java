@@ -9,8 +9,6 @@ public class Activity
     private int averageHeartRate; //average heart rate during the activity
 
 
-
-
     //Getters and setters
     public ActivityType getType()
     {

@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class ActivityFileReader
 {
-    private static final Pattern pattern = Pattern.compile("[A-Za-z]+,\s+[0-9]+/[0-9]+/[0-9]+,\s+[0-9]+,\s+[0-9]*\.[0-9]+,\s+[0-9]+");
+    private static final Pattern pattern = Pattern.compile("\s*[A-Za-z]+,\s*[0-9]+/[0-9]+/[0-9]+,\s*[0-9]+,\s*[0-9]*.[0-9]+,\s*[0-9]+\s*");
 
     ActivityFileReader(String fileName, ActivityManager manager)
     {
@@ -14,7 +14,19 @@ public class ActivityFileReader
             while(input.hasNextLine())
             {
                 String line = input.nextLine();
-                Pattern.matches(line, )
+                if(!line.matches(pattern.pattern()))
+                {
+                    System.out.println("invalid line - " + line);
+                    continue;
+                }
+
+                String[] split = line.split("\s*,\s*");
+                manager.AddActivity(
+                        split[0],
+                        split[1],
+                        Integer.parseInt(split[2]),
+                        Double.parseDouble(split[3]),
+                        Integer.parseInt(split[4]));
             }
         }
         catch(FileNotFoundException exception)
