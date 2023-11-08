@@ -13,7 +13,7 @@ public class Main
 
         manager.getFilteredAndSorted(
                 a -> a.getType() == ActivityType.SWIMMING,
-                ActivityOrder.CALORIES_DESC)
+                ActivityOrder.DATE_ASC)
                 .forEach(System.out::println);
 
 
