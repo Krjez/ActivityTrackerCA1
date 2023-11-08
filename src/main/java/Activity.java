@@ -113,10 +113,23 @@ public class Activity implements Comparable<Activity>
         this.averageHeartRate = averageHeartRate;
     }
 
-    //TODO default compareTo using Date
-    public int compareTo(Activity o)
+    //Default compareTo using Date
+    public int compareTo(Activity a)
     {
-        return this.date.compareTo(o.date);
+        if(this.date.equals(a.date))
+        {
+            return Integer.compare(this.duration, a.duration);
+        }
+        else
+        {
+            String [] a1 = this.date.split("/");
+            String [] a2 = a.date.split("/");
+
+            String a1s = a1[2] + a1[1] + a1[0];
+            String a2s = a2[2] + a2[1] + a2[0];
+
+            return a1s.compareTo(a2s);
+        }
     }
 
     @Override
