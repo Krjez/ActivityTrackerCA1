@@ -7,7 +7,7 @@ public enum Intensity
     VERY_VIGOROUS("Very Vigorous"),
     EXTREME("Extreme");
 
-    private String text;
+    private final String text;
     Intensity(String text)
     {
         this.text = text;

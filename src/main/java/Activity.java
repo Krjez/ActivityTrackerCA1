@@ -1,4 +1,6 @@
-public class Activity
+import java.time.format.DateTimeFormatter;
+
+public class Activity implements Comparable<Activity>
 {
 
     private  ActivityType type; //type of known activity - running/swimming/cycling - enum
@@ -68,9 +70,9 @@ public class Activity
 
         double[] intensityType = switch(type)
         {
-            case SWIMMING -> new double[] {0.5, 1.25, 2, 2.75, 3.5};
-            case RUNNING -> new double[] {4, 8, 12, 16, 24};
             case CYCLING -> new double[] {8, 16, 17, 25, 33};
+            case RUNNING -> new double[] {4, 8, 12, 16, 24};
+            case SWIMMING -> new double[] {0.5, 1.25, 2, 2.75, 3.5};
         };
 
         intensity = (kmph < intensityType[0]) ? Intensity.VERY_LIGHT :
@@ -89,9 +91,9 @@ public class Activity
 
         double[] intensityCalories = switch(type)
         {
-            case SWIMMING -> new double[] {5, 6.3, 7.6, 8.9, 10.2, 11.5};
-            case RUNNING -> new double[] {4.1, 7.2, 10, 15.4, 20.8, 27};
             case CYCLING -> new double[] {2, 5, 7, 13, 15, 20};
+            case RUNNING -> new double[] {4.1, 7.2, 10, 15.4, 20.8, 27};
+            case SWIMMING -> new double[] {5, 6.3, 7.6, 8.9, 10.2, 11.5};
         };
 
         caloriesBurned = intensityCalories[getIntensity().ordinal()];
@@ -111,6 +113,17 @@ public class Activity
         this.averageHeartRate = averageHeartRate;
     }
 
+    //TODO default compareTo using Date
+    public int compareTo(Activity o)
+    {
+        return this.date.compareTo(o.date);
+    }
+
+    @Override
+    public String toString()
+    {
+        return ("%10s %10s %10s %10.2f %10.1f").formatted(date, type, duration, distance, getCaloriesBurned());
+    }
 
 
 }

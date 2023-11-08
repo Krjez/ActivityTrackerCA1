@@ -1,10 +1,10 @@
-public enum ActivityType
+public enum ActivityType implements Comparable<ActivityType>
 {
-    SWIMMING("Swimming"),
+    CYCLING("Cycling"),
     RUNNING("Running"),
-    CYCLING("Cycling");
+    SWIMMING("Swimming");
 
-    private String text;
+    private final String text;
     ActivityType(String text)
     {
         this.text = text;
