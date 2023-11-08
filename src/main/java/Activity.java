@@ -9,6 +9,8 @@ public class Activity implements Comparable<Activity>
     private int duration; //time taken to perform the activity in minutes
     private double distance; //distance travelled in kilometers
     private int averageHeartRate; //average heart rate during the activity
+    private Intensity intensity;
+    private double caloriesBurned;
 
 
     //Getters and setters
@@ -16,54 +18,31 @@ public class Activity implements Comparable<Activity>
     {
         return type;
     }
-
-    public void setType(ActivityType type)
-    {
-        this.type = type;
-    }
-
-    public String getDate()
-    {
-        return date;
-    }
-
-    public void setDate(String date)
-    {
-        this.date = date;
-    }
-
+    public String getDate() { return date; }
     public int getDuration()
     {
         return duration;
     }
-
-    public void setDuration(int duration)
-    {
-        this.duration = duration;
-    }
-
     public double getDistance()
     {
         return distance;
     }
+    public int getAverageHeartRate() { return averageHeartRate; }
+    public Intensity getIntensity() { return intensity; }
+    public double getCaloriesBurned() { return caloriesBurned; }
 
-    public void setDistance(double distance)
+    //Full constructor
+    public Activity(ActivityType type, String date, int duration, double distance, int averageHeartRate)
     {
+        this.type = type;
+        this.date = date;
+        this.duration = duration;
         this.distance = distance;
-    }
-
-    public int getAverageHeartRate()
-    {
-        return averageHeartRate;
-    }
-
-    public void setAverageHeartRate(int averageHeartRate)
-    {
         this.averageHeartRate = averageHeartRate;
+        this.intensity = calculateIntensity();
+        this.caloriesBurned = calculateCaloriesBurned();
     }
-
-    //Intensity and
-    public Intensity getIntensity()
+    public Intensity calculateIntensity()
     {
         Intensity intensity;
         double kmph = this.distance/(this.duration/60d);
@@ -85,7 +64,7 @@ public class Activity implements Comparable<Activity>
         return intensity;
     }
 
-    public double getCaloriesBurned()
+    public double calculateCaloriesBurned()
     {
         double caloriesBurned;
 
@@ -100,17 +79,6 @@ public class Activity implements Comparable<Activity>
         caloriesBurned *= duration;
 
         return caloriesBurned;
-    }
-
-
-    //Full constructor
-    public Activity(ActivityType type, String date, int duration, double distance, int averageHeartRate)
-    {
-        this.type = type;
-        this.date = date;
-        this.duration = duration;
-        this.distance = distance;
-        this.averageHeartRate = averageHeartRate;
     }
 
     //TODO default compareTo using Date
