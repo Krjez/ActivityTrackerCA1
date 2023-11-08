@@ -1,16 +1,13 @@
-import java.time.format.DateTimeFormatter;
-
 public class Activity implements Comparable<Activity>
 {
 
-    private  ActivityType type; //type of known activity - running/swimming/cycling - enum
-    private String date; //when the activity was performed in dd/mm/yyyy
-    //TODO if needed use DateTimeFormatter with patter "dd/MM/yyyy"
-    private int duration; //time taken to perform the activity in minutes
-    private double distance; //distance travelled in kilometers
-    private int averageHeartRate; //average heart rate during the activity
-    private Intensity intensity;
-    private double caloriesBurned;
+    private final ActivityType type; //type of known activity - running/swimming/cycling - enum
+    private final String date; //when the activity was performed in dd/mm/yyyy
+    private final int duration; //time taken to perform the activity in minutes
+    private final double distance; //distance travelled in kilometers
+    private final int averageHeartRate; //average heart rate during the activity
+    private final Intensity intensity;
+    private final double caloriesBurned;
 
 
     //Getters and setters
@@ -41,6 +38,16 @@ public class Activity implements Comparable<Activity>
         this.averageHeartRate = averageHeartRate;
         this.intensity = calculateIntensity();
         this.caloriesBurned = calculateCaloriesBurned();
+    }
+    public Activity(String date, double distance)
+    {
+        this.type = null;
+        this.date = date;
+        this.duration = 0;
+        this.distance = distance;
+        this.averageHeartRate = 0;
+        this.intensity = null;
+        this.caloriesBurned = 0;
     }
     public Intensity calculateIntensity()
     {
@@ -84,14 +91,14 @@ public class Activity implements Comparable<Activity>
     //Default compareTo using Date
     public int compareTo(Activity a)
     {
-        if(this.date.equals(a.date))
+        if(this.date.equals(a.getDate()))
         {
-            return Integer.compare(this.duration, a.duration);
+            return Double.compare(this.distance, a.getDistance());
         }
         else
         {
             String [] a1 = this.date.split("/");
-            String [] a2 = a.date.split("/");
+            String [] a2 = a.getDate().split("/");
 
             String a1s = a1[2] + a1[1] + a1[0];
             String a2s = a2[2] + a2[1] + a2[0];
@@ -103,7 +110,7 @@ public class Activity implements Comparable<Activity>
     @Override
     public String toString()
     {
-        return ("%10s %10s %10s %10.2f %10.1f").formatted(date, type, duration, distance, getCaloriesBurned());
+        return ("%10s %10s %10s %10.2f %10s %10.1f %10s").formatted(date, type, duration, distance, averageHeartRate, getCaloriesBurned(), intensity);
     }
 
 
